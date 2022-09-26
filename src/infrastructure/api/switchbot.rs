@@ -16,7 +16,7 @@ impl SwitchBotApiImpl {
 impl SwitchBotApi for SwitchBotApiImpl {
     async fn get_devices(&self) -> anyhow::Result<GetDevicesResponse> {
         let client = SwitchBotClient::new();
-        Ok(client.get::<GetDevicesResponse>("/devices").await?)
+        client.get::<GetDevicesResponse>("/devices").await
     }
 
     async fn get_devices_status(
@@ -24,8 +24,8 @@ impl SwitchBotApi for SwitchBotApiImpl {
         device_id: &str,
     ) -> anyhow::Result<GetDevicesStatusResponse> {
         let client = SwitchBotClient::new();
-        Ok(client
+        client
             .get::<GetDevicesStatusResponse>(&format!("/devices/{}/status", device_id))
-            .await?)
+            .await
     }
 }
