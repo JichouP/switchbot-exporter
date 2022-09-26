@@ -4,7 +4,6 @@ extern crate rocket;
 extern crate serde;
 
 use anyhow;
-use use_case::switchbot::get_devices;
 
 mod domain;
 mod infrastructure;
@@ -18,9 +17,6 @@ fn hello(name: &str, age: u8) -> String {
 
 #[rocket::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let res = get_devices().await?;
-    println!("{:?}", res);
-
     let _rocket = rocket::build().mount("/", routes![hello]).launch().await?;
 
     Ok(())

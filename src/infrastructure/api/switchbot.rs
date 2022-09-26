@@ -1,6 +1,8 @@
 use self::client::SwitchBotClient;
 use crate::domain::switchbot::{
-    get_devices::GetDevicesResponse, get_devices_status::GetDevicesStatusResponse, SwitchBotApi,
+    get_devices::GetDevicesResponse,
+    get_devices_status::{GetDevicesMeterPlusStatusResponse, GetDevicesPlugMiniStatusResponse},
+    SwitchBotApi,
 };
 mod client;
 
@@ -19,13 +21,23 @@ impl SwitchBotApi for SwitchBotApiImpl {
         client.get::<GetDevicesResponse>("/devices").await
     }
 
-    async fn get_devices_status(
+    async fn get_meter_plus_devices_status(
         &self,
         device_id: &str,
-    ) -> anyhow::Result<GetDevicesStatusResponse> {
+    ) -> anyhow::Result<GetDevicesMeterPlusStatusResponse> {
         let client = SwitchBotClient::new();
         client
-            .get::<GetDevicesStatusResponse>(&format!("/devices/{}/status", device_id))
+            .get::<GetDevicesMeterPlusStatusResponse>(&format!("/devices/{}/status", device_id))
+            .await
+    }
+
+    async fn get_plug_mini_devices_status(
+        &self,
+        device_id: &str,
+    ) -> anyhow::Result<GetDevicesPlugMiniStatusResponse> {
+        let client = SwitchBotClient::new();
+        client
+            .get::<GetDevicesPlugMiniStatusResponse>(&format!("/devices/{}/status", device_id))
             .await
     }
 }

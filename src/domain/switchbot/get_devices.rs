@@ -8,7 +8,7 @@ pub struct GetDevicesResponse {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct GetDevicesResponseBody {
+struct GetDevicesResponseBody {
     device_list: Vec<GetDevicesResponseBodyDeviceListItem>,
     infrared_remote_list: Vec<GetDevicesResponseBodyInfraredRemoteListItem>,
 }
@@ -25,7 +25,7 @@ pub struct GetDevicesResponseBodyDeviceListItem {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct GetDevicesResponseBodyInfraredRemoteListItem {
+struct GetDevicesResponseBodyInfraredRemoteListItem {
     device_id: String,
     device_name: String,
     remote_type: String,
