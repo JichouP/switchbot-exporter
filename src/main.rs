@@ -1,5 +1,7 @@
 #[macro_use]
 extern crate rocket;
+#[macro_use]
+extern crate serde;
 
 mod domain;
 mod infrastructure;
