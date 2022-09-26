@@ -5,12 +5,12 @@ use crate::{
     infrastructure::api::switchbot::SwitchBotApiImpl,
 };
 
-pub async fn getDevices() -> anyhow::Result<GetDevicesResponse> {
+pub async fn get_devices() -> anyhow::Result<GetDevicesResponse> {
     let api = SwitchBotApiImpl::new();
     api.get_devices().await
 }
 
-pub async fn getDevicesStatus(device_id: &str) -> anyhow::Result<GetDevicesStatusResponse> {
+pub async fn get_devices_status(device_id: &str) -> anyhow::Result<GetDevicesStatusResponse> {
     let api = SwitchBotApiImpl::new();
     api.get_devices_status(device_id).await
 }
