@@ -5,8 +5,10 @@ use reqwest::{
     header::{HeaderMap, AUTHORIZATION},
 };
 use ring::hmac;
+use serde::Deserialize;
 
 pub struct SwitchBotClient {
+    base_url: String,
     client: reqwest::Client,
 }
 
@@ -34,6 +36,19 @@ impl SwitchBotClient {
             .build()
             .unwrap();
 
-        Self { client }
+        Self {
+            base_url: "https://api.switch-bot.com/v1.1".to_string(),
+            client,
+        }
+    }
+
+    pub async fn get<T: for<'de> Deserialize<'de>>(&self, path: &str) -> anyhow::Result<T> {
+        Ok(self
+            .client
+            .get(format!("{}{}", self.base_url, path))
+            .send()
+            .await?
+            .json::<T>()
+            .await?)
     }
 }
