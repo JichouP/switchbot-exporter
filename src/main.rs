@@ -3,6 +3,8 @@ extern crate rocket;
 #[macro_use]
 extern crate serde;
 
+use anyhow;
+
 mod domain;
 mod infrastructure;
 mod service;
@@ -13,7 +15,9 @@ fn hello(name: &str, age: u8) -> String {
     format!("Hello, {} year old named {}!", age, name)
 }
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello])
+#[rocket::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let _rocket = rocket::build().mount("/", routes![hello]).launch().await?;
+
+    Ok(())
 }
