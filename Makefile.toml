@@ -7,3 +7,8 @@ args = ["compose", "up", "-d", "--build"]
 description = "Remove the app from Docker"
 command = "docker"
 args = ["compose", "down", "--rmi", "local"]
+
+[tasks.logs]
+description = "Show log of app"
+command = "docker"
+args = ["compose", "logs", "-ft", "--tail", "100"]
