@@ -1,0 +1,9 @@
+[tasks.up]
+description = "Start the app on Docker"
+command = "docker"
+args = ["compose", "up", "-d", "--build"]
+
+[tasks.down]
+description = "Remove the app from Docker"
+command = "docker"
+args = ["compose", "down", "--rmi", "local"]
