@@ -1,6 +1,6 @@
 use self::client::SwitchBotClient;
 use crate::domain::switchbot::{
-    get_devices::DevicesResponse, get_devices_status::DevicesStatusResponse, SwitchBotApi,
+    get_devices::GetDevicesResponse, get_devices_status::GetDevicesStatusResponse, SwitchBotApi,
 };
 mod client;
 
@@ -14,15 +14,18 @@ impl SwitchBotApiImpl {
 
 #[async_trait]
 impl SwitchBotApi for SwitchBotApiImpl {
-    async fn get_devices(&self) -> anyhow::Result<DevicesResponse> {
+    async fn get_devices(&self) -> anyhow::Result<GetDevicesResponse> {
         let client = SwitchBotClient::new();
-        Ok(client.get::<DevicesResponse>("/devices").await?)
+        Ok(client.get::<GetDevicesResponse>("/devices").await?)
     }
 
-    async fn get_devices_status(&self, device_id: &str) -> anyhow::Result<DevicesStatusResponse> {
+    async fn get_devices_status(
+        &self,
+        device_id: &str,
+    ) -> anyhow::Result<GetDevicesStatusResponse> {
         let client = SwitchBotClient::new();
         Ok(client
-            .get::<DevicesStatusResponse>(&format!("/devices/{}/status", device_id))
+            .get::<GetDevicesStatusResponse>(&format!("/devices/{}/status", device_id))
             .await?)
     }
 }

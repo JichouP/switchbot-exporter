@@ -1,21 +1,21 @@
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DevicesResponse {
+pub struct GetDevicesResponse {
     status_code: usize,
-    body: DevicesResponseBody,
+    body: GetDevicesResponseBody,
     message: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DevicesResponseBody {
-    device_list: Vec<DevicesResponseBodyDeviceListItem>,
-    infrared_remote_list: Vec<DevicesResponseBodyInfraredRemoteListItem>,
+pub struct GetDevicesResponseBody {
+    device_list: Vec<GetDevicesResponseBodyDeviceListItem>,
+    infrared_remote_list: Vec<GetDevicesResponseBodyInfraredRemoteListItem>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DevicesResponseBodyDeviceListItem {
+pub struct GetDevicesResponseBodyDeviceListItem {
     device_id: String,
     device_name: String,
     device_type: String,
@@ -25,7 +25,7 @@ pub struct DevicesResponseBodyDeviceListItem {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DevicesResponseBodyInfraredRemoteListItem {
+pub struct GetDevicesResponseBodyInfraredRemoteListItem {
     device_id: String,
     device_name: String,
     remote_type: String,

@@ -1,14 +1,14 @@
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DevicesStatusResponse {
+pub struct GetDevicesStatusResponse {
     status_code: usize,
-    body: DevicesStatusResponseBody,
+    body: GetDevicesStatusResponseBody,
     message: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", untagged)]
-pub enum DevicesStatusResponseBody {
+pub enum GetDevicesStatusResponseBody {
     PlugMini {
         device_id: String,
         device_type: String,
