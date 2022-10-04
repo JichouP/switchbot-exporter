@@ -1,45 +1,45 @@
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDevicesMeterPlusStatusResponse {
-    status_code: usize,
-    body: GetDevicesMeterPlusStatusResponseBody,
-    message: String,
+    pub status_code: usize,
+    pub body: GetDevicesMeterPlusStatusResponseBody,
+    pub message: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-struct GetDevicesMeterPlusStatusResponseBody {
-    device_id: String,
-    device_type: String,
-    hub_device_id: String,
+pub struct GetDevicesMeterPlusStatusResponseBody {
+    pub device_id: String,
+    pub device_type: String,
+    pub hub_device_id: String,
     /// Unit: %
-    humidity: usize,
+    pub humidity: usize,
     /// Unit: C
-    temperature: f64,
+    pub temperature: f64,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDevicesPlugMiniStatusResponse {
-    status_code: usize,
-    body: GetDevicesPlugMiniStatusResponseBody,
-    message: String,
+    pub status_code: usize,
+    pub body: GetDevicesPlugMiniStatusResponseBody,
+    pub message: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-struct GetDevicesPlugMiniStatusResponseBody {
-    device_id: String,
-    device_type: String,
-    hub_device_id: String,
+pub struct GetDevicesPlugMiniStatusResponseBody {
+    pub device_id: String,
+    pub device_type: String,
+    pub hub_device_id: String,
     /// ON/OFF state
-    power: String,
+    pub power: String,
     /// Unit: V
-    voltage: f64,
+    pub voltage: f64,
     /// Unit: W/min
-    weight: f64,
+    pub weight: f64,
     /// Unit: min
-    electricity_of_day: usize,
+    pub electricity_of_day: usize,
     /// Unit: A
-    electric_current: f64,
+    pub electric_current: f64,
 }
