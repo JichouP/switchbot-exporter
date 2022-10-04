@@ -22,7 +22,7 @@ impl SwitchBotState {
 
 #[derive(Debug, Clone, Default, Serialize)]
 pub struct MeterPlusState {
-    pub humidity: usize,
+    pub humidity: f64,
     pub temperature: f64,
 }
 
@@ -46,7 +46,7 @@ pub struct PlugMiniState {
     pub power: String,
     pub voltage: f64,
     pub weight: f64,
-    pub electricity_of_day: usize,
+    pub electricity_of_day: f64,
     pub electric_current: f64,
 }
 

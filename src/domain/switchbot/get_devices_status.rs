@@ -13,7 +13,7 @@ pub struct GetDevicesMeterPlusStatusResponseBody {
     pub device_type: String,
     pub hub_device_id: String,
     /// Unit: %
-    pub humidity: usize,
+    pub humidity: f64,
     /// Unit: C
     pub temperature: f64,
 }
@@ -39,7 +39,7 @@ pub struct GetDevicesPlugMiniStatusResponseBody {
     /// Unit: W/min
     pub weight: f64,
     /// Unit: min
-    pub electricity_of_day: usize,
+    pub electricity_of_day: f64,
     /// Unit: A
     pub electric_current: f64,
 }

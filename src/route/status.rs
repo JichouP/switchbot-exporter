@@ -3,13 +3,13 @@ pub mod status {
     use rocket::{serde::json::Json, Route, State};
     use std::sync::{Arc, Mutex};
 
-    #[get("/status")]
-    fn status(state: &State<Arc<Mutex<SwitchBotState>>>) -> Json<SwitchBotState> {
-        let s = state.lock().unwrap();
-        Json(s.clone())
+    #[get("/")]
+    fn get(state: &State<Arc<Mutex<SwitchBotState>>>) -> Json<SwitchBotState> {
+        let state = state.lock().unwrap();
+        Json(state.clone())
     }
 
     pub fn build() -> Vec<Route> {
-        routes![status]
+        routes![get]
     }
 }

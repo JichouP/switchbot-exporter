@@ -21,7 +21,8 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let rocket_handle = rocket::build()
         .manage(Arc::clone(&switch_bot_state))
-        .mount("/", route::status::status::build())
+        .mount("/status", route::status::status::build())
+        .mount("/exporter", route::exporter::exporter::build())
         .launch();
 
     let (_, rocket_result) = futures::future::join(scheduler_handle, rocket_handle).await;
