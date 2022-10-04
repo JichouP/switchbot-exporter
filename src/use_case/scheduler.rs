@@ -3,9 +3,10 @@ use std::sync::{Arc, Mutex};
 use tokio::task::JoinHandle;
 
 use crate::{
-    domain::{state::switchbot::SwitchBotState, switchbot::SwitchBotApi},
-    infrastructure::{api::switchbot::SwitchBotApiImpl, env::switchbot::SwitchBotEnv},
+    domain::state::switchbot::SwitchBotState,
+    infrastructure::env::switchbot::SwitchBotEnv,
     service::scheduler::setup,
+    use_case::switchbot::{get_meter_plus_devices_status, get_plug_mini_devices_status},
 };
 
 pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> JoinHandle<()> {
@@ -21,12 +22,9 @@ pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> Jo
                 ..
             } = SwitchBotEnv::new();
 
-            let switch_bot_api = SwitchBotApiImpl::new();
             // Meter Plus
             {
-                let response = switch_bot_api
-                    .get_meter_plus_devices_status(&meter_plus_device_id)
-                    .await;
+                let response = get_meter_plus_devices_status(&meter_plus_device_id).await;
 
                 if let Ok(meter_plus) = response {
                     switch_bot_state.lock().unwrap().meter_plus = meter_plus.into();
@@ -34,9 +32,7 @@ pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> Jo
             }
             // Plug Mini PC
             {
-                let response = switch_bot_api
-                    .get_plug_mini_devices_status(&plug_mini_pc_device_id)
-                    .await;
+                let response = get_plug_mini_devices_status(&plug_mini_pc_device_id).await;
 
                 if let Ok(plug_mini) = response {
                     switch_bot_state.lock().unwrap().plug_mini_pc = plug_mini.into();
@@ -44,9 +40,7 @@ pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> Jo
             }
             // Plug Mini Desk
             {
-                let response = switch_bot_api
-                    .get_plug_mini_devices_status(&plug_mini_desk_device_id)
-                    .await;
+                let response = get_plug_mini_devices_status(&plug_mini_desk_device_id).await;
 
                 if let Ok(plug_mini) = response {
                     switch_bot_state.lock().unwrap().plug_mini_desk = plug_mini.into();

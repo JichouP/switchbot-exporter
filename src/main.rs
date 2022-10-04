@@ -3,9 +3,7 @@ extern crate rocket;
 #[macro_use]
 extern crate serde;
 
-use anyhow;
 use domain::state::switchbot::SwitchBotState;
-use futures;
 use std::sync::{Arc, Mutex};
 use use_case::scheduler::setup_scheduler;
 

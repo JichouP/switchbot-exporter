@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDevicesResponse {
     status_code: usize,
@@ -6,14 +6,14 @@ pub struct GetDevicesResponse {
     message: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct GetDevicesResponseBody {
     device_list: Vec<GetDevicesResponseBodyDeviceListItem>,
     infrared_remote_list: Vec<GetDevicesResponseBodyInfraredRemoteListItem>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDevicesResponseBodyDeviceListItem {
     device_id: String,
@@ -23,7 +23,7 @@ pub struct GetDevicesResponseBodyDeviceListItem {
     hub_device_id: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct GetDevicesResponseBodyInfraredRemoteListItem {
     device_id: String,

@@ -7,6 +7,7 @@ use crate::{
     infrastructure::api::switchbot::SwitchBotApiImpl,
 };
 
+#[allow(dead_code)]
 pub async fn get_devices() -> anyhow::Result<GetDevicesResponse> {
     let api = SwitchBotApiImpl::new();
     api.get_devices().await
