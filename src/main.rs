@@ -23,12 +23,12 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let scheduler_handle = setup_scheduler(Arc::clone(&switch_bot_state));
 
-    let _rocket = rocket::build()
+    let rocket_handle = rocket::build()
         .manage(Arc::clone(&switch_bot_state))
         .mount("/", routes![hello])
         .launch();
 
-    let (_, rocket_result) = futures::future::join(scheduler_handle, _rocket).await;
+    let (_, rocket_result) = futures::future::join(scheduler_handle, rocket_handle).await;
     let _rocket = rocket_result?;
 
     Ok(())
