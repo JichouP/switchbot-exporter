@@ -55,6 +55,5 @@ pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> Jo
         }
     };
 
-    let join_handle = setup(f).await;
-    join_handle
+    setup(f).await
 }
