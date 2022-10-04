@@ -9,13 +9,9 @@ use use_case::scheduler::setup_scheduler;
 
 mod domain;
 mod infrastructure;
+mod route;
 mod service;
 mod use_case;
-
-#[get("/hello/<name>/<age>")]
-fn hello(name: &str, age: u8) -> String {
-    format!("Hello, {} year old named {}!", age, name)
-}
 
 #[rocket::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -25,7 +21,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let rocket_handle = rocket::build()
         .manage(Arc::clone(&switch_bot_state))
-        .mount("/", routes![hello])
+        .mount("/", route::status::status::build())
         .launch();
 
     let (_, rocket_result) = futures::future::join(scheduler_handle, rocket_handle).await;

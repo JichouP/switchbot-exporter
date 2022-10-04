@@ -3,7 +3,7 @@ use crate::domain::switchbot::get_devices_status::{
     GetDevicesPlugMiniStatusResponse, GetDevicesPlugMiniStatusResponseBody,
 };
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Serialize)]
 pub struct SwitchBotState {
     pub meter_plus: MeterPlusState,
     pub plug_mini_pc: PlugMiniState,
@@ -20,7 +20,7 @@ impl SwitchBotState {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize)]
 pub struct MeterPlusState {
     pub humidity: usize,
     pub temperature: f64,
@@ -41,7 +41,7 @@ impl From<GetDevicesMeterPlusStatusResponse> for MeterPlusState {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize)]
 pub struct PlugMiniState {
     pub power: String,
     pub voltage: f64,
