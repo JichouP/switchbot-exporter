@@ -14,7 +14,7 @@ pub struct SwitchBotClient {
 
 impl SwitchBotClient {
     pub fn new() -> Self {
-        let SwitchBotEnv { token, secret } = SwitchBotEnv::new();
+        let SwitchBotEnv { token, secret, .. } = SwitchBotEnv::new();
 
         let t = Utc::now().timestamp_millis();
         let nonce = uuid::Uuid::new_v4().to_string();
