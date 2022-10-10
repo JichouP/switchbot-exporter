@@ -41,7 +41,9 @@ jobs:
         with:
           images: |
             jichoup/switchbot-exporter
-            ghcr.io/${{ github.repository }}
+            ghcr.io/jichoup/switchbot-exporter
+          tags: |
+            type=semver,pattern={{version}}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v3
