@@ -20,3 +20,14 @@ $ cargo make down
 # or
 $ makers down
 ```
+
+## How to use
+
+1. Fork this repository
+1. Set the following environment variables
+   - `SWITCH_BOT_TOKEN`
+   - `SWITCH_BOT_SECRET`
+   - `SWITCH_BOT_METER_PLUS_DEVICE_ID`
+   - `SWITCH_BOT_PLUG_MINI_PC_DEVICE_ID`
+   - `SWITCH_BOT_PLUG_MINI_DESK_DEVICE_ID`
+1. Run CI
