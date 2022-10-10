@@ -1,6 +1,9 @@
-use std::sync::{Arc, Mutex};
+use std::{
+    sync::{Arc, Mutex},
+    time::Instant,
+};
 
-use tokio::task::JoinHandle;
+use crossbeam_channel::Receiver;
 
 use crate::{
     domain::state::switchbot::SwitchBotState,
@@ -9,7 +12,11 @@ use crate::{
     use_case::switchbot::{get_meter_plus_devices_status, get_plug_mini_devices_status},
 };
 
-pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> JoinHandle<()> {
+pub async fn setup_scheduler(
+    switch_bot_state: Arc<Mutex<SwitchBotState>>,
+    ctrl_c_events: Receiver<()>,
+    ticks: Receiver<Instant>,
+) -> () {
     let switch_bot_state = Arc::clone(&switch_bot_state);
 
     let f = move || {
@@ -51,5 +58,5 @@ pub async fn setup_scheduler(switch_bot_state: Arc<Mutex<SwitchBotState>>) -> Jo
 
     f().await;
 
-    setup(f).await
+    setup(f, ctrl_c_events, ticks).await
 }

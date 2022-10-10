@@ -3,9 +3,13 @@ extern crate rocket;
 #[macro_use]
 extern crate serde;
 
+use crossbeam_channel::{bounded, tick, Receiver};
 use domain::state::switchbot::SwitchBotState;
 use rocket::fairing::AdHoc;
-use std::sync::{Arc, Mutex};
+use std::{
+    sync::{Arc, Mutex},
+    time::Duration,
+};
 use use_case::scheduler::setup_scheduler;
 
 mod domain;
@@ -14,11 +18,23 @@ mod route;
 mod service;
 mod use_case;
 
+fn ctrl_channel() -> Result<Receiver<()>, ctrlc::Error> {
+    let (sender, receiver) = bounded(100);
+    ctrlc::set_handler(move || {
+        let _ = sender.send(());
+    })?;
+
+    Ok(receiver)
+}
+
 #[rocket::main]
 async fn main() -> Result<(), anyhow::Error> {
+    let ctrl_c_events = ctrl_channel()?;
+    let ticks = tick(Duration::from_secs(1));
+
     let switch_bot_state = Arc::new(Mutex::new(SwitchBotState::new()));
 
-    let scheduler_handle = setup_scheduler(Arc::clone(&switch_bot_state));
+    let scheduler_handle = setup_scheduler(Arc::clone(&switch_bot_state), ctrl_c_events, ticks);
 
     let rocket_handle = rocket::build()
         .manage(Arc::clone(&switch_bot_state))
@@ -35,10 +51,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .mount("/metrics", route::exporter::exporter::build())
         .launch();
 
-    let (_, rocket_result) = futures::future::join(scheduler_handle, rocket_handle).await;
-    let _rocket = rocket_result?;
-
-    println!("{}", _rocket.config().port);
+    let (_, _) = futures::future::join(scheduler_handle, rocket_handle).await;
 
     Ok(())
 }
