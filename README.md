@@ -26,6 +26,7 @@ $ makers down
 See the [example](./example)
 
 1. Set the following environment variables
+   - `PORT`
    - `SWITCHBOT_TOKEN`
    - `SWITCHBOT_SECRET`
    - `SWITCHBOT_METER_PLUS_DEVICE_ID`
