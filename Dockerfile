@@ -15,7 +15,7 @@ RUN cargo build --release
 
 # We do not need the Rust toolchain to run the binary!
 FROM gcr.io/distroless/cc
-LABEL version="0.1.0" description="The exporter for SwitchBot made in Rust" maintainer="JichouP"
+LABEL version="0.2.0" description="The exporter for SwitchBot made in Rust" maintainer="JichouP"
 WORKDIR /app
 COPY --from=builder /app/target/release/switchbot-exporter /usr/local/bin/switchbot-exporter
 COPY ./Rocket.toml /app/Rocket.toml
