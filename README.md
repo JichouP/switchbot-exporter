@@ -23,11 +23,12 @@ $ makers down
 
 ## How to use
 
-1. Fork this repository
+See the [example](./example)
+
 1. Set the following environment variables
    - `SWITCHBOT_TOKEN`
    - `SWITCHBOT_SECRET`
    - `SWITCHBOT_METER_PLUS_DEVICE_ID`
    - `SWITCHBOT_PLUG_MINI_PC_DEVICE_ID`
    - `SWITCHBOT_PLUG_MINI_DESK_DEVICE_ID`
-1. Run CI
+1. Run `docker compose up`
