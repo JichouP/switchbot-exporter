@@ -16,12 +16,12 @@ mod use_case;
 
 #[rocket::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let switch_bot_state = Arc::new(Mutex::new(SwitchBotState::new()));
+    let switchbot_state = Arc::new(Mutex::new(SwitchBotState::new()));
 
-    let scheduler_handle = setup_scheduler(Arc::clone(&switch_bot_state));
+    let scheduler_handle = setup_scheduler(Arc::clone(&switchbot_state));
 
     let rocket_handle = rocket::build()
-        .manage(Arc::clone(&switch_bot_state))
+        .manage(Arc::clone(&switchbot_state))
         .attach(AdHoc::on_liftoff("Liftoff Printer", |rocket| {
             Box::pin(async {
                 println!(
