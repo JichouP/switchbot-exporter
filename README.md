@@ -21,6 +21,14 @@ $ cargo make down
 $ makers down
 ```
 
+Build for arm64
+
+```sh
+docker buildx create --name mybuilder
+docker buildx use mybuilder
+docker buildx build --platform linux/amd64,linux/arm64 -t jichoup/switchbot-exporter --push .
+```
+
 ## How to use
 
 See the [example](./example)
