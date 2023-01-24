@@ -13,7 +13,7 @@ clokwerk = "0.4.0"
 crossbeam-channel = "0.5.6"
 ctrlc = { version = "3.2.3", features = ["termination"] }
 futures = "0.3.24"
-prometheus = "0.13.2"
+prometheus = "0.13.3"
 reqwest = { version = "0.11.12", features = ["json"] }
 ring = "0.16.20"
 rocket = { version = "0.5.0-rc.2", features = ["json"] }
