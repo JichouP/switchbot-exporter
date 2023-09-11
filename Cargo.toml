@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.75"
-base64 = "0.21.3"
+base64 = "0.21.4"
 chrono = "0.4.28"
 clokwerk = "0.4.0"
 crossbeam-channel = "0.5.8"
