@@ -11,7 +11,7 @@ base64 = "0.21.5"
 chrono = "0.4.31"
 clokwerk = "0.4.0"
 crossbeam-channel = "0.5.9"
-ctrlc = { version = "3.4.1", features = ["termination"] }
+ctrlc = { version = "3.4.2", features = ["termination"] }
 futures = "0.3.29"
 prometheus = "0.13.3"
 reqwest = { version = "0.11.22", features = ["json"] }
